@@ -27,8 +27,9 @@ def parse_deep_markets(sports):
                                              if event.get('tournament_name') and event.get('competition_name') is None
                                              else event.get('competition_name') if event.get('competition_name')
                                              else None,
-                                             'competition_id': event.get('Id') if event.get('tournament_name') and event.get('competition_name') is None
-                                             else event.get('competition_name') if event.get('competition_name')
+                                             'competition_id': event.get('Id')
+                                             if event.get('tournament_name') and event.get('competition_name') is None
+                                             else event.get('competition_id') if event.get('competition_name')
                                              else None,
                                              'tournament_name': event.get('tournament_name', event.get('Name')),
                                              'tournament_id': event.get('tournament_id', event.get('Id')),
