@@ -3,7 +3,8 @@ import pytz
 import datetime
 from dateutil.parser import parse
 
-from betdaq_py.exceptions import APIError
+from betdaq_py.exceptions import *
+from betdaq_py.enums import ErrorMap
 
 
 def get_tag(elem):
@@ -57,12 +58,12 @@ def clean_locals(params):
 
 
 def check_status_code(response, codes=None):
-    """Checks response.status_code is in codes
+    """Checks response status_code is in codes
     :param response: Requests response
     :param codes: List of accepted codes or callable
     :raises: StatusCodeError if code invalid
     """
-    codes = codes or [200]
-    if response.status_code not in codes:
-        raise APIError(response.status_code)
-
+    codes = codes or [0]
+    response_code = response.get('ReturnStatus', {}).get('Code')
+    if response_code not in codes:
+        raise eval(ErrorMap(response_code).name)

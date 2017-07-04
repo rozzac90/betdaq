@@ -1,4 +1,5 @@
 
+from enum import Enum
 
 class BetdaqError(Exception):
     """Base class for Betdaq Errors"""
@@ -10,9 +11,9 @@ class APIError(BetdaqError):
 
     def __init__(self, response, method=None, params=None, exception=None):
         if response:
-            error_data = response.get('error')
-            message = '%s \nParams: %s \nException: %s \nError: %s \nFull Response: %s' % (
-                method, params, exception, error_data, response
+            error_data = response.get('ResponseStatus', {})
+            message = '%s \nParams: %s \nException: %s \nErrorCode: %s \nError Detail: %s' % (
+                method, params, exception, error_data.get('Code'), response.get('ExtraInformation')
             )
         else:
             message = '%s \nParams: %s \nException: %s' % (
@@ -28,10 +29,10 @@ class ResourceError(BetdaqError):
         super(ResourceError, self).__init__(message)
 
 
-class SystemError(BetdaqError):
+class BetdaqSystemError(BetdaqError):
     def __init__(self):
         message = 'The API call was not processed successfully because of some serious technical error within the system.'
-        super(SystemError, self).__init__(message)
+        super(BetdaqSystemError, self).__init__(message)
 
 
 class EventClassifierDoesNotExist(BetdaqError):
@@ -364,61 +365,3 @@ class CannotChangeToSPIfUnmatched(BetdaqError):
         message = 'The requested operation could not be performed because the orderFillType of the order ' \
                   'concerned is not Normal.'
         super(CannotChangeToSPIfUnmatched, self).__init__(message)
-
-
-exception_map = {
-    'RC001': ResourceError,
-    'RC002': SystemError,
-    'RC005': EventClassifierDoesNotExist,
-    'RC008': MarketDoesNotExist,
-    'RC011': SelectionDoesNotExist,
-    'RC015': MarketNotActive,
-    'RC016': MarketNeitherSuspendedNorActive,
-    'RC017': SelectionNotActive,
-    'RC019': InsufficientVirtualPunterFunds,
-    'RC021': OrderDoesNotExist,
-    'RC022': NoUnmatchedAmount,
-    'RC114': ResetHasOccurred,
-    'RC127': OrderAlreadySuspended,
-    'RC128': TradingCurrentlySuspended,
-    'RC131': InvalidOdds,
-    'RC136': WithdrawalSequenceNumberIsInvalid,
-    'RC137': MaximumInputRecordsExceeded,
-    'RC208': PunterSuspended,
-    'RC240': PunterProhibitedFromPlacingOrders,
-    'RC241': InsufficientPunterFunds,
-    'RC271': OrderAPIInProgress,
-    'RC274': PunterOrderMismatch,
-    'RC281': MarketNotEnabledForMultiples,
-    'RC285': MultipleLayerParameterAlreadyExists,
-    'RC288': LevelsRequestedExceedsMaximum,
-    'RC289': NoMultipleOfferAvailable,
-    'RC293': InRunningDelayInEffect,
-    'RC295': MultipleSelectionsUnderSameEvent,
-    'RC296': MultipleSelectionsWithSameName,
-    'RC299': DuplicateOrderSpecified,
-    'RC301': OrderNotSuspended,
-    'RC302': PunterIsSuspendedFromTrading,
-    'RC303': PunterHasActiveOrders,
-    'RC304': PunterNotSuspendedFromTrading,
-    'RC305': ExpiryTimeInThePast,
-    'RC306': NoChangeSpecified,
-    'RC307': SoapHeaderNotSupplied,
-    'RC308': IncorrectVersionNumber,
-    'RC309': NoUsernameSpecified,
-    'RC310': InvalidParameters,
-    'RC311': NoPasswordSpecified,
-    'RC312': MultipleCombinationExclusionAlreadyExists,
-    'RC313': MultipleCombinationExlcusionDoesNotExist,
-    'RC405': InvalidPassword,
-    'RC406': PunterIsBlacklisted,
-    'RC425': PunterNotRegisteredAsMultipleLayer,
-    'RC462': PunterAlreadyRegisteredForHeartbeat,
-    'RC463': PunterNotRegisteredForHeartbeat,
-    'RC473': ThresholdSpecifiedTooSmall,
-    'RC477': UnmatchedOrderCouldResult,
-    'RC533': PunterNotAuthorisedForAPI,
-    'RC597': MarketIsForRealMoney,
-    'RC598': MarketIsForPlayMoney,
-    'RC892': CannotChangeToSPIfUnmatched,
-}

@@ -4,7 +4,7 @@ from requests import ConnectionError
 from zeep.helpers import serialize_object
 
 from betdaq_py.exceptions import APIError
-from betdaq_py.utils import check_status_code, make_tz_naive, listy_mc_list
+from betdaq_py.utils import check_status_code, make_tz_naive
 
 
 class BaseEndpoint(object):
@@ -30,7 +30,9 @@ class BaseEndpoint(object):
             raise APIError(None, method, params, 'ConnectionError')
         except Exception as e:
             raise APIError(None, method, params, e)
-        return serialize_object(response)
+        data = serialize_object(response)
+        check_status_code(data)
+        return data
 
     @staticmethod
     def process_response(response, date_time_sent, result_target, error_handler=None):
