@@ -365,3 +365,9 @@ class CannotChangeToSPIfUnmatched(BetdaqError):
         message = 'The requested operation could not be performed because the orderFillType of the order ' \
                   'concerned is not Normal.'
         super(CannotChangeToSPIfUnmatched, self).__init__(message)
+
+
+class InvalidUsername(BetdaqError):
+    def __init__(self):
+        message = 'Username provided is not valid.'
+        super(InvalidUsername, self).__init__(message)

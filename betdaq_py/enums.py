@@ -356,3 +356,4 @@ class ErrorMap(Enum):
     MarketIsForRealMoney = 597
     MarketIsForPlayMoney = 598
     CannotChangeToSPIfUnmatched = 892
+    InvalidUsername = 1000
