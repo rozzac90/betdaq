@@ -1,10 +1,11 @@
 
 import os
 from setuptools import setup, find_packages
+from betdaq import __version__
 
 setup(
-    name="betdaq_py",
-    version="0.0.1",
+    name="betdaq",
+    version=__version__,
     author="Rory Cole",
     author_email="rory.cole1990@gmail.com",
     description="Betdaq API Python wrapper",
