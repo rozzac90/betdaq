@@ -1,15 +1,15 @@
 
 import datetime
 
-from betdaq_py.utils import clean_locals
-from betdaq_py.enums import Boolean, PriceFormat
-from betdaq_py.endpoints.baseendpoint import BaseEndpoint
-from betdaq_py.utils import listy_mc_list
-from betdaq_py.errorparsers.marketdata import (
+from betdaq.utils import clean_locals
+from betdaq.enums import Boolean, PriceFormat
+from betdaq.endpoints.baseendpoint import BaseEndpoint
+from betdaq.utils import listy_mc_list
+from betdaq.errorparsers.marketdata import (
     err_mkt_info, err_prices, err_selection_changes, err_selection_trades, err_sp_events, err_sport_markets,
     err_sports, err_withdrawals
 )
-from betdaq_py.resources.marketdataresources import (
+from betdaq.resources.marketdataresources import (
     parse_sports, parse_deep_markets, parse_market, parse_selection_changes, parse_market_withdrawal,
     parse_market_prices, parse_ladder, parse_selection_trades,
 )

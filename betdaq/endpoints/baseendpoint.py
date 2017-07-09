@@ -3,8 +3,8 @@ import datetime
 from requests import ConnectionError
 from zeep.helpers import serialize_object
 
-from betdaq_py.exceptions import APIError
-from betdaq_py.utils import check_status_code, make_tz_naive
+from betdaq.exceptions import APIError
+from betdaq.utils import check_status_code, make_tz_naive
 
 
 class BaseEndpoint(object):

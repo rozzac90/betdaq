@@ -1,9 +1,9 @@
 
 import datetime
 
-from betdaq_py.utils import clean_locals
-from betdaq_py.endpoints.baseendpoint import BaseEndpoint
-from betdaq_py.resources.accountresources import parse_account_balance, parse_account_postings
+from betdaq.utils import clean_locals
+from betdaq.endpoints.baseendpoint import BaseEndpoint
+from betdaq.resources.accountresources import parse_account_balance, parse_account_postings
 
 
 class Account(BaseEndpoint):

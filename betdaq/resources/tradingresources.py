@@ -1,6 +1,6 @@
 
 
-from betdaq_py.resources.baseresources import BaseResource
+from betdaq.resources.baseresources import BaseResource
 
 
 class BlacklistInfo(BaseResource):

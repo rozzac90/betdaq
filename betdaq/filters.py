@@ -1,6 +1,6 @@
 
-from betdaq_py.utils import clean_locals
-from betdaq_py.enums import Boolean, WithdrawRepriceOption, OrderKillType
+from betdaq.utils import clean_locals
+from betdaq.enums import Boolean, WithdrawRepriceOption, OrderKillType
 
 
 def create_order(SelectionId, Stake, Price, Polarity, ExpectedSelectionResetCount, ExpectedWithdrawalSequenceNumber,

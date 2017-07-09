@@ -1,6 +1,6 @@
 
-from betdaq_py.utils import make_tz_naive
-from betdaq_py.enums import OrderActionType, OrderStatus, OrderKillType, Polarity, MarketStatus
+from betdaq.utils import make_tz_naive
+from betdaq.enums import OrderActionType, OrderStatus, OrderKillType, Polarity, MarketStatus
 
 
 def parse_suspended_order(suspend):

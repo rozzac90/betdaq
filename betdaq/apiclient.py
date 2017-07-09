@@ -1,5 +1,5 @@
-from betdaq_py.baseclient import BaseClient
-from betdaq_py import endpoints
+from betdaq.baseclient import BaseClient
+from betdaq import endpoints
 
 
 class APIClient(BaseClient):

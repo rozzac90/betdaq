@@ -6,6 +6,6 @@
 
 build/
 dist/
-betdaq_py.egg-info/
+betdaq.egg-info/
 *.log
 *.html
