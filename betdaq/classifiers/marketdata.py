@@ -1,5 +1,5 @@
 
-from betdaq_py.utils import get_attribs, get_tag
+from betdaq.utils import get_attribs, get_tag
 
 
 def parse_selection_trades_classifier(elem):

@@ -1,11 +1,11 @@
 
 import datetime
 
-from betdaq_py.enums import Boolean
-from betdaq_py.utils import clean_locals, listy_mc_list
-from betdaq_py.endpoints.baseendpoint import BaseEndpoint
-from betdaq_py.errorparsers.betting import err_cancel_market, err_suspend_orders
-from betdaq_py.resources.bettingresources import (
+from betdaq.enums import Boolean
+from betdaq.utils import clean_locals, listy_mc_list
+from betdaq.endpoints.baseendpoint import BaseEndpoint
+from betdaq.errorparsers.betting import err_cancel_market, err_suspend_orders
+from betdaq.resources.bettingresources import (
     parse_orders, parse_single_order, parse_orders_receipt, parse_order_update,
     parse_cancelled_order, parse_suspended_order,
 )

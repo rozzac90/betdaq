@@ -1,10 +1,10 @@
 
 import datetime
 
-from betdaq_py import resources
-from betdaq_py.enums import HeartbeatAction
-from betdaq_py.utils import clean_locals
-from betdaq_py.endpoints.baseendpoint import BaseEndpoint
+from betdaq import resources
+from betdaq.enums import HeartbeatAction
+from betdaq.utils import clean_locals
+from betdaq.endpoints.baseendpoint import BaseEndpoint
 
 
 class Trading(BaseEndpoint):

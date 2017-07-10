@@ -1,8 +1,8 @@
 
 import bisect
 
-from betdaq_py.utils import make_tz_naive, price_side_map
-from betdaq_py.enums import MarketType, MarketStatus, SelectionStatus, Polarity
+from betdaq.utils import make_tz_naive, price_side_map
+from betdaq.enums import MarketType, MarketStatus, SelectionStatus, Polarity
 
 
 def parse_deep_markets(sports):

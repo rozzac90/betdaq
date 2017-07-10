@@ -2,9 +2,7 @@
 import pytz
 import datetime
 from dateutil.parser import parse
-
-from betdaq_py.exceptions import *
-from betdaq_py.enums import ErrorMap
+from betdaq.enums import ErrorMap
 
 
 def get_tag(elem):

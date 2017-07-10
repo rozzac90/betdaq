@@ -1,5 +1,5 @@
 
-from betdaq_py.utils import make_tz_naive
+from betdaq.utils import make_tz_naive
 
 
 def parse_account_postings(posts):

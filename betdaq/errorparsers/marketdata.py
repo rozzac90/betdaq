@@ -1,9 +1,9 @@
 
-from betdaq_py.classifiers.marketdata import (
+from betdaq.classifiers.marketdata import (
     parse_classifier, parse_event_classfiers, parse_market_classifier, parse_selection_sequence_classifier,
     parse_selection_trades_classifier,
 )
-from betdaq_py.utils import get_attribs, get_tag, listy_mc_list
+from betdaq.utils import get_attribs, get_tag, listy_mc_list
 
 
 def err_selection_trades(response):

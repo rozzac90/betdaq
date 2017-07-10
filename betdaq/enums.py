@@ -1,6 +1,7 @@
 
 from enum import Enum
 
+
 class HeartbeatAction(Enum):
     """
     Action to be performed when a threshold period has expired without a Pulse having been received.
