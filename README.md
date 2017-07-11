@@ -1,4 +1,4 @@
-# betdaq_py
+# betdaq
 Python wrapper for Betdaq API.
 
 [Betdaq Documentation](http://api.betdaq.com/v2.0/Docs/default.aspx)
