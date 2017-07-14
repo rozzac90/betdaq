@@ -1,6 +1,7 @@
 
 import pytz
 import datetime
+from decimal import Decimal
 from dateutil.parser import parse
 from betdaq.enums import ErrorMap
 
@@ -65,3 +66,10 @@ def check_status_code(response, codes=None):
     response_code = response.get('ReturnStatus', {}).get('Code')
     if response_code not in codes:
         raise eval(ErrorMap(response_code).name)
+
+
+def floatify(deci):
+    if isinstance(deci, Decimal):
+        return float(deci)
+    else:
+        return deci

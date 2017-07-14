@@ -1,7 +1,7 @@
 
 import bisect
 
-from betdaq.utils import make_tz_naive, price_side_map
+from betdaq.utils import make_tz_naive, price_side_map, floatify
 from betdaq.enums import MarketType, MarketStatus, SelectionStatus, Polarity
 
 
@@ -45,7 +45,7 @@ def parse_runners(data):
             'runner_name': data.get('Name'),
             'runner_status': SelectionStatus(int(data.get('Status'))).name if data.get('Status') else None,
             'reset_count': data.get('ResetCount'),
-            'deduction_factor': float(data.get('DeductionFactor')),
+            'deduction_factor': floatify(data.get('DeductionFactor')),
             'runner_display_order': data.get('DisplayOrder')}
 
 
@@ -67,7 +67,7 @@ def parse_market(mkt_data, other_info):
                 'in_play': mkt.get('IsCurrentlyInRunning'),
                 'in_play_delay': mkt.get('InRunningDelaySeconds'),
                 'event_id': mkt.get('EventClassifierId'),
-                'place_payout': mkt.get('PlacePayout')},
+                'place_payout': floatify(mkt.get('PlacePayout'))},
              **other_info} for mkt in mkt_data]
 
 
@@ -89,7 +89,7 @@ def parse_market_prices(mkt):
             'runners': [parse_runner_prices(runner) for runner in mkt.get('Selections', [])],
             'is_play_market': mkt.get('IsPlayMarket'),
             'status': MarketStatus(int(mkt.get('Status'))) if mkt.get('Status') else None,
-            'number_of_winners': mkt.get('NumberOfWinningSelections'),
+            'number_of_winners': floatify(mkt.get('NumberOfWinningSelections')),
             'withdrawal_sequence_number': mkt.get('WithdrawalSequenceNumber'),
             'market_display_order': mkt.get('DisplayOrder'),
             'enabled_for_multiples': mkt.get('IsEnabledForMultiples'),
@@ -99,10 +99,10 @@ def parse_market_prices(mkt):
             'in_play': mkt.get('IsCurrentlyInRunning'),
             'in_running_delay': mkt.get('InRunningDelaySeconds'),
             'event_id': mkt.get('EventClassifierId'),
-            'market_total_matched': mkt.get('TotalMatchedAmount'),
-            'place_payout': mkt.get('PlacePayout'),
-            'market_back_matched': mkt.get('MatchedMarketForStake'),
-            'market_lay_matched': mkt.get('MatchedMarketAgainstStake'),
+            'market_total_matched': floatify(mkt.get('TotalMatchedAmount')),
+            'place_payout': floatify(mkt.get('PlacePayout')),
+            'market_back_matched': floatify(mkt.get('MatchedMarketForStake')),
+            'market_lay_matched': floatify(mkt.get('MatchedMarketAgainstStake')),
             'home_team_score': mkt.get('HomeTeamScore'),
             'away_team_score': mkt.get('AwayTeamScore'),
             'score_type': mkt.get('ScoreType'),
@@ -115,22 +115,22 @@ def parse_runner_prices(runner):
         'runner_id': runner.get('Id'),
         'runner_name': runner.get('Name'),
         'runner_status': SelectionStatus(int(runner.get('Status'))).name if runner.get('Status') else None,
-        'runner_reset_count': runner.get('ResetCount'),
-        'deduction_factor': runner.get('DeductionFactor'),
-        'runner_back_matched_size': runner.get('MatchedSelectionForStake'),
-        'runner_lay_matched_size': runner.get('MatchedSelectionAgainstStake'),
+        'runner_reset_count': floatify(runner.get('ResetCount')),
+        'deduction_factor': floatify(runner.get('DeductionFactor')),
+        'runner_back_matched_size': floatify(runner.get('MatchedSelectionForStake')),
+        'runner_lay_matched_size': floatify(runner.get('MatchedSelectionAgainstStake')),
         'runner_last_matched_time': make_tz_naive(runner.get('LastMatchedOccurredAt')),
-        'runner_last_matched_price': runner.get('LastMatchedPrice'),
-        'runner_last_matched_back_size': runner.get('LastMatchedForSideAmount'),
-        'runner_last_matched_lay_size': runner.get('LastMatchedAgainstSideAmount'),
-        'runner_open_interest': runner.get('SelectionOpenInterest'),
-        'runner_market_winnings': runner.get('MarketWinnings'),
-        'runner_positive_winnings': runner.get('MarketPositiveWinnings'),
-        'runner_back_matched_same_price': runner.get('MatchedForSideAmountAtSamePrice'),
-        'runner_lay_matched_same_price': runner.get('MatchedAgainstSideAmountAtSamePrice'),
+        'runner_last_matched_price': floatify(runner.get('LastMatchedPrice')),
+        'runner_last_matched_back_size': floatify(runner.get('LastMatchedForSideAmount')),
+        'runner_last_matched_lay_size': floatify(runner.get('LastMatchedAgainstSideAmount')),
+        'runner_open_interest': floatify(runner.get('SelectionOpenInterest')),
+        'runner_market_winnings': floatify(runner.get('MarketWinnings')),
+        'runner_positive_winnings': floatify(runner.get('MarketPositiveWinnings')),
+        'runner_back_matched_same_price': floatify(runner.get('MatchedForSideAmountAtSamePrice')),
+        'runner_lay_matched_same_price': floatify(runner.get('MatchedAgainstSideAmountAtSamePrice')),
         'runner_last_traded_same_price': make_tz_naive(runner.get('FirstMatchAtSamePriceOccurredAt')),
-        'runner_total_matched_orders': runner.get('NumberOrders'),
-        'runner_total_matched_punters': runner.get('NumberPunters'),
+        'runner_total_matched_orders': floatify(runner.get('NumberOrders')),
+        'runner_total_matched_punters': floatify(runner.get('NumberPunters')),
         }
 
 
@@ -143,11 +143,11 @@ def parse_runner_book(book):
             if order:
                 side = price_side_map.get(side)
                 if side == 'back':
-                    bisect.insort(back_levels, float(order.get('Price')))
-                    order_book['batb'].append([float(order.get('Price')), float(order.get('Stake'))])
+                    bisect.insort(back_levels, floatify(order.get('Price')))
+                    order_book['batb'].append([floatify(order.get('Price')), floatify(order.get('Stake'))])
                 elif side == 'lay':
-                    bisect.insort_right(lay_levels, float(order.get('Price')))
-                    order_book['batl'].append([float(order.get('Price')), float(order.get('Stake'))])
+                    bisect.insort_right(lay_levels, floatify(order.get('Price')))
+                    order_book['batl'].append([floatify(order.get('Price')), floatify(order.get('Stake'))])
     back_levels.reverse()
     order_book['batb'] = [[back_levels.index(x[0]), x[0], x[1]] for x in order_book['batb']]
     order_book['batl'] = [[lay_levels.index(x[0]), x[0], x[1]] for x in order_book['batl']]
@@ -180,14 +180,14 @@ def parse_market_withdrawal(data):
         'runner_id': data.get('SelectionId'),
         'withdrawal_time': make_tz_naive(data.get('WithdrawalTime')),
         'sequence_number': data.get('SequenceNumber'),
-        'reduction_factor': data.get('ReductionFactor'),
-        'compound_reduction_factor': data.get('CompoundReductionFactor'),
+        'reduction_factor': floatify(data.get('ReductionFactor')),
+        'compound_reduction_factor': floatify(data.get('CompoundReductionFactor')),
     }
 
 
 def parse_ladder(data):
     return [
-        {'price': float(ol.get('price')),
+        {'price': floatify(ol.get('price')),
          'value': ol.get('representation')} for ol in data.get('Ladder', {})]
 
 
@@ -201,8 +201,8 @@ def parse_trade_item(trade):
     trd = trade.get('TradeItems', {})
     return {
         'traded_time': make_tz_naive(trd.get('occurredAt')),
-        'price': trd.get('price'),
-        'size': trd.get('backersStake'),
+        'price': floatify(trd.get('price')),
+        'size': floatify(trd.get('backersStake')),
         'side': Polarity(int(trd.get('tradeType'))).name if trd.get('tradeType') else None,
     }
 

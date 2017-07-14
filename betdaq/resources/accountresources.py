@@ -1,20 +1,20 @@
 
-from betdaq.utils import make_tz_naive
+from betdaq.utils import make_tz_naive, floatify
 
 
 def parse_account_postings(posts):
     return {
             'postings_complete': posts.get('HaveAllPostingsBeenReturned'),
             'currency': posts.get('Currency'),
-            'available_funds': posts.get('AvailableFunds'),
-            'balance': posts.get('Balance'),
-            'credit': posts.get('Credit'),
-            'exposure': posts.get('Exposure'),
+            'available_funds': floatify(posts.get('AvailableFunds')),
+            'balance': floatify(posts.get('Balance')),
+            'credit': floatify(posts.get('Credit')),
+            'exposure': floatify(posts.get('Exposure')),
             'transactions': [{
                 'transaction_time': make_tz_naive(order.get('PostedAt')),
                 'description': order.get('Description'),
-                'amount': order.get('Amount'),
-                'resulting_balance': order.get('ResultingBalance'),
+                'amount': floatify(order.get('Amount')),
+                'resulting_balance': floatify(order.get('ResultingBalance')),
                 'transaction_category': order.get('PostingCategory'),
                 'order_id': order.get('OrderId'),
                 'market_id': order.get('MarketId'),
@@ -26,8 +26,8 @@ def parse_account_postings(posts):
 def parse_account_balance(bal):
     return {
         'currency': bal.get('Currency'),
-        'available_funds': bal.get('AvailableFunds'),
-        'balance': bal.get('Balance'),
-        'credit': bal.get('Credit'),
-        'exposure': bal.get('Exposure'),
+        'available_funds': floatify(bal.get('AvailableFunds')),
+        'balance': floatify(bal.get('Balance')),
+        'credit': floatify(bal.get('Credit')),
+        'exposure': floatify(bal.get('Exposure')),
     }
