@@ -69,7 +69,7 @@ def check_status_code(response, codes=None):
 
 
 def floatify(deci):
-    if isinstance(deci, Decimal):
+    if isinstance(deci, Decimal) or isinstance(deci, str):
         return float(deci)
     else:
         return deci
