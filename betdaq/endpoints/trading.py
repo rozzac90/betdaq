@@ -1,7 +1,6 @@
 
 import datetime
 
-from betdaq import resources
 from betdaq.enums import HeartbeatAction
 from betdaq.utils import clean_locals
 from betdaq.endpoints.baseendpoint import BaseEndpoint
@@ -18,7 +17,7 @@ class Trading(BaseEndpoint):
         """
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('ListBlacklistInformation', {}, secure=True)
-        return self.process_response(response, resources.BlacklistInfo, date_time_sent,  datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, 'ApiNamesAndTimes')
 
     def suspend_from_trading(self):
         """
@@ -28,7 +27,7 @@ class Trading(BaseEndpoint):
         """
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('SuspendFromTrading', {}, secure=True)
-        return self.process_response(response, resources.EmptyResource, date_time_sent,  datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
 
     def unsuspend_from_trading(self):
         """
@@ -38,7 +37,7 @@ class Trading(BaseEndpoint):
         """
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('UnsuspendFromTrading', {}, secure=True)
-        return self.process_response(response, resources.EmptyResource, date_time_sent, datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
 
     def register_heartbeat(self, HeartbeatAction=HeartbeatAction.CancelOrders.value, ThresholdMs=6000):
         """
@@ -53,7 +52,7 @@ class Trading(BaseEndpoint):
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('RegisterHeartbeat', params, secure=True)
-        return self.process_response(response, resources.EmptyResource, date_time_sent, datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
 
     def deregister_heartbeat(self):
         """
@@ -64,7 +63,7 @@ class Trading(BaseEndpoint):
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('DeregisterHeartbeat', params, secure=True)
-        return self.process_response(response, resources.EmptyResource, date_time_sent, datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
 
     def change_hearbeat(self, HeartbeatAction=HeartbeatAction.CancelOrders.value, ThresholdMs=6000):
         """
@@ -79,7 +78,7 @@ class Trading(BaseEndpoint):
         params = clean_locals(locals())
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('ChangeHeartbeatRegistration', params, secure=True)
-        return self.process_response(response, resources.EmptyResource, date_time_sent, datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
 
     def send_pulse(self):
         """
@@ -89,4 +88,4 @@ class Trading(BaseEndpoint):
         """
         date_time_sent = datetime.datetime.utcnow()
         response = self.request('Pulse', {}, secure=True)
-        return self.process_response(response, resources.Pulse, date_time_sent, datetime.datetime.utcnow())
+        return self.process_response(response, date_time_sent, None)
