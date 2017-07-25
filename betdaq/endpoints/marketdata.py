@@ -82,8 +82,8 @@ class MarketData(BaseEndpoint):
         :param SelectionSequenceNumber: sequence of the poll to check diffs from.
         :return: any changes to selections since the given sequence number.
         """
-        date_time_sent = datetime.datetime.utcnow()
         params = clean_locals(locals())
+        date_time_sent = datetime.datetime.utcnow()
         response = self.request('ListSelectionsChangedSince', params, secure=False)
         data = self.process_response(response, date_time_sent, 'Selections', error_handler=err_selection_changes)
         return [parse_selection_changes(chg) for chg in listy_mc_list(data.get('data', []))] if data.get('data') else []
@@ -95,8 +95,8 @@ class MarketData(BaseEndpoint):
         :param MarketId: ID of the market to check for withdrawals.
         :return: any withdrawals from the market.
         """
-        date_time_sent = datetime.datetime.utcnow()
         params = clean_locals(locals())
+        date_time_sent = datetime.datetime.utcnow()
         response = self.request('ListMarketWithdrawalHistory', params, secure=False)
         data = self.process_response(response, date_time_sent, 'Withdrawals', error_handler=err_withdrawals)
         return [parse_market_withdrawal(mkt) for mkt in listy_mc_list(data.get('data', []))] if data.get('data') else []

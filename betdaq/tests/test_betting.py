@@ -1,5 +1,4 @@
 
-import datetime
 import unittest
 import unittest.mock as mock
 from zeep.helpers import serialize_object
