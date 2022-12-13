@@ -6,7 +6,7 @@ class BaseClient:
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.wsdl_file = 'http://api.betdaq.com/v2.0/API.wsdl'
+        self.wsdl_file = 'https://api.betdaq.com/v2.0/API.wsdl'
         self.readonly_types = None
         self.secure_types = None
         self.secure_client, self.readonly_client = self.initialise_wsdl()
