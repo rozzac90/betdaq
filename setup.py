@@ -15,7 +15,7 @@ setup(
     author="Rory Cole",
     author_email="rory.cole1990@gmail.com",
     description="Betdaq API Python wrapper",
-    url="https://github.com/rozzac90/betdaq_py",
+    url="https://github.com/tavkhelidzeluka/betdaq",
     packages=find_packages(),
     install_requires=[line.strip() for line in open("requirements.txt")],
     long_description=open('README.md').read(),
