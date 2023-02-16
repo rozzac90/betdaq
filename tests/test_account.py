@@ -1,4 +1,3 @@
-
 import datetime
 import unittest
 import unittest.mock as mock
@@ -24,11 +23,17 @@ class AccountTest(unittest.TestCase):
     @mock.patch('betdaq.endpoints.account.Account.process_response')
     @mock.patch('betdaq.endpoints.account.Account.request', return_value=mock.Mock())
     def test_get_account_transactions(self, mock_request, mock_process_response):
-        self.account.get_account_transactions(StartTime=datetime.datetime(2017, 1, 1).timestamp(),
-                                              EndTime=datetime.datetime(2017, 1, 10).timestamp())
+        start_time = datetime.datetime.today()
+        end_time = (start_time + datetime.timedelta(days=9))
+
+        self.account.get_account_transactions(StartTime=start_time.timestamp(),
+                                              EndTime=end_time.timestamp())
 
         mock_request.assert_called_once_with(
-            'ListAccountPostings', {'StartTime': 1483228800.0, 'EndTime': 1484006400.0}, secure=True
+            'ListAccountPostings', {
+                'StartTime': start_time.timestamp(),
+                'EndTime': end_time.timestamp()
+            }, secure=True
         )
         assert mock_process_response.call_count == 1
 

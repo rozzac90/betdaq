@@ -10,7 +10,7 @@ class BaseClientTest(unittest.TestCase):
         client = BaseClient(username='username', password='password')
         assert client.username == 'username'
         assert client.password == 'password'
-        assert client.wsdl_file == 'http://api.betdaq.com/v2.0/API.wsdl'
+        assert client.wsdl_file == 'https://api.betdaq.com/v2.0/API.wsdl'
         assert client.external_headers == {"version": 2.0, "languageCode": 'en', "username": 'username',
                                            "password": 'password', "applicationIdentifier": None}
 
