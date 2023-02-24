@@ -7,7 +7,7 @@ class BaseClient:
         self.username = username
         self.password = password
         self.wsdl_file = 'https://api.betdaq.com/v2.0/API.wsdl' if not b2b \
-            else 'https://api.betdaq.com/v2.0/API.wsdl'
+            else 'https://api.betdaqb2b.com/v2.0/API.wsdl'
         self.readonly_types = None
         self.secure_types = None
         self.secure_client, self.readonly_client = self.initialise_wsdl()
