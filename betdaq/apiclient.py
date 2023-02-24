@@ -4,8 +4,8 @@ from betdaq import endpoints
 
 class APIClient(BaseClient):
 
-    def __init__(self, username, password):
-        super(APIClient, self).__init__(username, password)
+    def __init__(self, username: str, password: str, b2b: bool = False):
+        super().__init__(username, password, b2b=b2b)
 
         self.betting = endpoints.Betting(self)
         self.account = endpoints.Account(self)

@@ -3,7 +3,7 @@ from zeep import Settings
 
 
 class BaseClient:
-    def __init__(self, username, password, b2b: bool = False):
+    def __init__(self, username: str, password: str, b2b: bool = False):
         self.username = username
         self.password = password
         self.wsdl_file = 'https://api.betdaq.com/v2.0/API.wsdl' if not b2b \
