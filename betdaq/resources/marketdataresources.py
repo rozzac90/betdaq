@@ -188,7 +188,7 @@ def parse_market_withdrawal(data):
 def parse_ladder(data):
     return [
         {'price': floatify(ol.get('price')),
-         'value': ol.get('representation')} for ol in data.get('Ladder', {})]
+         'value': ol.get('representation')} for ol in data]
 
 
 def parse_sports(sport):
