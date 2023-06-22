@@ -17,3 +17,9 @@ class APIClient(BaseClient):
 
     def __str__(self):
         return 'APIClient'
+
+
+class B2BBetdaqAPIClient(APIClient):
+    def initialise_wsdl(self):
+        self.wsdl_file = 'https://api.betdaqb2b.com/v2.0/API.wsdl'
+        return super().initialise_wsdl()
