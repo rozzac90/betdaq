@@ -5,8 +5,8 @@ Python wrapper for Betdaq API.
 
 # Installation
 
-```
-$ pip install betdaq
+```bash
+pip install git+https://github.com/tavkhelidzeluka/betdaq.git
 ```
 
 # Usage
