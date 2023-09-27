@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "betdaq"
+version = "0.0.14"
+description = "Betdaq API Python wrapper"
+authors = ["Rory Cole <rory.cole1990@gmail.com>"]
+maintainers = [
+    "Luka Tavkhelidze <tavkhelidzeluka@gmail.com>"
+]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+zeep = "^4.2.1"
+requests = "^2.31.0"
+python-dateutil = "^2.8.2"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
