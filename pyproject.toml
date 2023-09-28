@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "betdaq"
-version = "0.0.14"
+version = "0.0.15"
 description = "Betdaq API Python wrapper"
 authors = ["Rory Cole <rory.cole1990@gmail.com>"]
 maintainers = [
@@ -10,7 +10,7 @@ license = "MIT"
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = "^3.11"
 
 zeep = "^4.2.1"
 requests = "^2.31.0"
